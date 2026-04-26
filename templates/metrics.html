@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Metrics | PhishGuard AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="{{ url_for('static', filename='metrics.css') }}" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="stars"></div>
+    <div class="twinkling"></div>
+    
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-shield-alt"></i>
+                <span>PhishGuard AI</span>
+            </div>
+            <div class="nav-links">
+                <a href="/" class="nav-link">
+                    <i class="fas fa-search"></i> Detector
+                </a>
+                <a href="/metrics" class="nav-link active">
+                    <i class="fas fa-chart-bar"></i> Metrics
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="metrics-header">
+            <h1 class="page-title">
+                <i class="fas fa-chart-line"></i>
+                <span class="gradient-text">Model Performance</span> Metrics
+            </h1>
+            <p class="page-subtitle">
+                Comprehensive comparison of 10 machine learning models
+            </p>
+        </div>
+
+        <!-- Best Model Highlight -->
+        {% if metrics and metrics|length > 0 %}
+        <div class="best-model-card">
+            <div class="trophy-icon">
+                <i class="fas fa-trophy"></i>
+            </div>
+            <div class="best-model-content">
+                <h2>🏆 Champion Model</h2>
+                <h3 class="model-name">{{ metrics[0].model }}</h3>
+                <div class="metric-badges">
+                    <div class="badge">
+                        <span class="badge-label">Accuracy</span>
+                        <span class="badge-value">{{ (metrics[0].accuracy * 100)|round(2) }}%</span>
+                    </div>
+                    <div class="badge">
+                        <span class="badge-label">F1-Score</span>
+                        <span class="badge-value">{{ (metrics[0].f1_score * 100)|round(2) }}%</span>
+                    </div>
+                    <div class="badge">
+                        <span class="badge-label">Recall</span>
+                        <span class="badge-value">{{ (metrics[0].recall * 100)|round(2) }}%</span>
+                    </div>
+                    <div class="badge">
+                        <span class="badge-label">Precision</span>
+                        <span class="badge-value">{{ (metrics[0].precision * 100)|round(2) }}%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Metrics Table -->
+        <div class="metrics-table-container">
+            <h2 class="section-title">
+                <i class="fas fa-table"></i> Detailed Comparison
+            </h2>
+            <div class="table-wrapper">
+                <table class="metrics-table">
+                    <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>Model</th>
+                            <th>Accuracy</th>
+                            <th>F1-Score</th>
+                            <th>Recall</th>
+                            <th>Precision</th>
+                            <th>Performance</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for metric in metrics %}
+                        <tr class="metric-row {% if loop.index == 1 %}first-place{% elif loop.index == 2 %}second-place{% elif loop.index == 3 %}third-place{% endif %}">
+                            <td class="rank-cell">
+                                {% if loop.index == 1 %}
+                                    <span class="medal gold">🥇</span>
+                                {% elif loop.index == 2 %}
+                                    <span class="medal silver">🥈</span>
+                                {% elif loop.index == 3 %}
+                                    <span class="medal bronze">🥉</span>
+                                {% else %}
+                                    <span class="rank-number">{{ loop.index }}</span>
+                                {% endif %}
+                            </td>
+                            <td class="model-cell">
+                                <strong>{{ metric.model }}</strong>
+                            </td>
+                            <td class="metric-cell">
+                                <div class="metric-value">{{ (metric.accuracy * 100)|round(2) }}%</div>
+                                <div class="metric-bar">
+                                    <div class="metric-fill" style="width: {{ (metric.accuracy * 100)|round(2) }}%"></div>
+                                </div>
+                            </td>
+                            <td class="metric-cell">
+                                <div class="metric-value">{{ (metric.f1_score * 100)|round(2) }}%</div>
+                                <div class="metric-bar">
+                                    <div class="metric-fill" style="width: {{ (metric.f1_score * 100)|round(2) }}%"></div>
+                                </div>
+                            </td>
+                            <td class="metric-cell">
+                                <div class="metric-value">{{ (metric.recall * 100)|round(2) }}%</div>
+                                <div class="metric-bar">
+                                    <div class="metric-fill" style="width: {{ (metric.recall * 100)|round(2) }}%"></div>
+                                </div>
+                            </td>
+                            <td class="metric-cell">
+                                <div class="metric-value">{{ (metric.precision * 100)|round(2) }}%</div>
+                                <div class="metric-bar">
+                                    <div class="metric-fill" style="width: {{ (metric.precision * 100)|round(2) }}%"></div>
+                                </div>
+                            </td>
+                            <td class="performance-cell">
+                                {% set avg = ((metric.accuracy + metric.f1_score + metric.recall + metric.precision) / 4 * 100)|round(1) %}
+                                <div class="performance-badge {% if avg >= 95 %}excellent{% elif avg >= 90 %}good{% elif avg >= 80 %}fair{% else %}poor{% endif %}">
+                                    {{ avg }}%
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Charts Section -->
+        <div class="charts-section">
+            <div class="chart-container">
+                <h2 class="section-title">
+                    <i class="fas fa-chart-bar"></i> Accuracy Comparison
+                </h2>
+                <canvas id="accuracyChart"></canvas>
+            </div>
+            
+            <div class="chart-container">
+                <h2 class="section-title">
+                    <i class="fas fa-chart-pie"></i> Metrics Distribution
+                </h2>
+                <canvas id="metricsChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%)">
+                    <i class="fas fa-database"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>11,054</h3>
+                    <p>Training Samples</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%)">
+                    <i class="fas fa-layer-group"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>30</h3>
+                    <p>Features Analyzed</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>10</h3>
+                    <p>ML Models Tested</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>{{ (metrics[0].accuracy * 100)|round(1) }}%</h3>
+                    <p>Best Accuracy</p>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="no-data-card">
+            <i class="fas fa-exclamation-circle"></i>
+            <h2>No Metrics Available</h2>
+            <p>Please train the model first by running <code>python train_model.py</code></p>
+        </div>
+        {% endif %}
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 PhishGuard AI | Powered by Machine Learning</p>
+    </footer>
+
+    <script>
+        // Animated stars background
+        const starsDiv = document.querySelector('.stars');
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            starsDiv.appendChild(star);
+        }
+
+        // Chart data
+        const metrics = {{ metrics | tojson }};
+        
+        if (metrics && metrics.length > 0) {
+            // Accuracy Chart
+            const accuracyCtx = document.getElementById('accuracyChart').getContext('2d');
+            new Chart(accuracyCtx, {
+                type: 'bar',
+                data: {
+                    labels: metrics.map(m => m.model),
+                    datasets: [{
+                        label: 'Accuracy (%)',
+                        data: metrics.map(m => (m.accuracy * 100).toFixed(2)),
+                        backgroundColor: 'rgba(102, 126, 234, 0.8)',
+                        borderColor: 'rgba(102, 126, 234, 1)',
+                        borderWidth: 2,
+                        borderRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                            ticks: { color: '#fff' }
+                        },
+                        x: {
+                            grid: { display: false },
+                            ticks: { 
+                                color: '#fff',
+                                maxRotation: 45,
+                                minRotation: 45
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Metrics Radar Chart
+            const metricsCtx = document.getElementById('metricsChart').getContext('2d');
+            const topModel = metrics[0];
+            new Chart(metricsCtx, {
+                type: 'radar',
+                data: {
+                    labels: ['Accuracy', 'F1-Score', 'Recall', 'Precision'],
+                    datasets: [{
+                        label: topModel.model,
+                        data: [
+                            (topModel.accuracy * 100).toFixed(2),
+                            (topModel.f1_score * 100).toFixed(2),
+                            (topModel.recall * 100).toFixed(2),
+                            (topModel.precision * 100).toFixed(2)
+                        ],
+                        backgroundColor: 'rgba(67, 233, 123, 0.2)',
+                        borderColor: 'rgba(67, 233, 123, 1)',
+                        borderWidth: 3,
+                        pointBackgroundColor: 'rgba(67, 233, 123, 1)',
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 2,
+                        pointRadius: 5
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 100,
+                            grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                            angleLines: { color: 'rgba(255, 255, 255, 0.1)' },
+                            pointLabels: { color: '#fff', font: { size: 14 } },
+                            ticks: { color: '#fff', backdropColor: 'transparent' }
+                        }
+                    },
+                    plugins: {
+                        legend: { 
+                            labels: { color: '#fff', font: { size: 14 } }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>

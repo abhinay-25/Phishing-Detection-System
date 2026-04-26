@@ -1,0 +1,72 @@
+[
+  {
+    "model": "XGBoost Classifier",
+    "accuracy": 0.9706,
+    "f1_score": 0.9739,
+    "recall": 0.983,
+    "precision": 0.965
+  },
+  {
+    "model": "CatBoost Classifier",
+    "accuracy": 0.9701,
+    "f1_score": 0.9735,
+    "recall": 0.9814,
+    "precision": 0.9657
+  },
+  {
+    "model": "Random Forest",
+    "accuracy": 0.9692,
+    "f1_score": 0.9726,
+    "recall": 0.9765,
+    "precision": 0.9687
+  },
+  {
+    "model": "Multi-layer Perceptron",
+    "accuracy": 0.9688,
+    "f1_score": 0.9723,
+    "recall": 0.9822,
+    "precision": 0.9627
+  },
+  {
+    "model": "Decision Tree",
+    "accuracy": 0.9602,
+    "f1_score": 0.9643,
+    "recall": 0.9611,
+    "precision": 0.9674
+  },
+  {
+    "model": "Support Vector Machine",
+    "accuracy": 0.9512,
+    "f1_score": 0.957,
+    "recall": 0.9733,
+    "precision": 0.9413
+  },
+  {
+    "model": "Gradient Boosting Classifier",
+    "accuracy": 0.9493,
+    "f1_score": 0.955,
+    "recall": 0.9619,
+    "precision": 0.9481
+  },
+  {
+    "model": "K-Nearest Neighbors",
+    "accuracy": 0.9398,
+    "f1_score": 0.9463,
+    "recall": 0.9498,
+    "precision": 0.9429
+  },
+  {
+    "model": "Logistic Regression",
+    "accuracy": 0.9335,
+    "f1_score": 0.9412,
+    "recall": 0.953,
+    "precision": 0.9297
+  },
+  {
+    "model": "Naive Bayes Classifier",
+    "accuracy": 0.6047,
+    "f1_score": 0.4537,
+    "recall": 0.2939,
+    "precision": 0.9945
+  }
+]

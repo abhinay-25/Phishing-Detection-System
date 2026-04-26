@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phishing URL Detection | AI-Powered Security</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="{{ url_for('static', filename='detect.css') }}" rel="stylesheet">
+</head>
+<body>
+    <div class="stars"></div>
+    <div class="twinkling"></div>
+    
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-shield-alt"></i>
+                <span>PhishGuard AI</span>
+            </div>
+            <div class="nav-links">
+                <a href="/" class="nav-link active">
+                    <i class="fas fa-search"></i> Detector
+                </a>
+                <a href="/metrics" class="nav-link">
+                    <i class="fas fa-chart-bar"></i> Metrics
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="hero-section">
+            <h1 class="hero-title">
+                <span class="gradient-text">AI-Powered</span> Phishing Detection
+            </h1>
+            <p class="hero-subtitle">
+                Protect yourself from malicious URLs using advanced machine learning
+            </p>
+        </div>
+
+        <div class="detection-card">
+            <div class="card-header">
+                <i class="fas fa-link"></i>
+                <h2>URL Analysis</h2>
+            </div>
+            
+            <form method="POST" action="/" class="detection-form" id="urlForm">
+                <div class="input-group">
+                    <div class="input-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <input 
+                        type="text" 
+                        name="url" 
+                        id="urlInput" 
+                        class="url-input" 
+                        placeholder="Enter URL to analyze (e.g., https://example.com)"
+                        required
+                    />
+                    <button type="submit" class="scan-btn">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Scan URL</span>
+                    </button>
+                </div>
+            </form>
+
+            {% if xx != -1 %}
+            <div class="result-section" id="resultSection">
+                <div class="url-display">
+                    <strong>Analyzed URL:</strong>
+                    <a href="{{ url }}" target="_blank" class="analyzed-url">{{ url }}</a>
+                </div>
+
+                {% if xx >= 0.50 %}
+                <div class="result-card safe">
+                    <div class="result-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="result-content">
+                        <h3 class="result-title">✅ Safe Website</h3>
+                        <div class="confidence-bar">
+                            <div class="confidence-fill safe-fill" style="width: {{ (xx * 100)|round|int }}%"></div>
+                        </div>
+                        <p class="confidence-text">
+                            Confidence: <strong>{{ (xx * 100)|round(1) }}%</strong>
+                        </p>
+                        <p class="result-message">
+                            This URL appears to be legitimate and safe to visit.
+                        </p>
+                        <a href="{{ url }}" target="_blank" class="action-btn safe-btn">
+                            <i class="fas fa-external-link-alt"></i>
+                            Continue to Website
+                        </a>
+                    </div>
+                </div>
+                {% else %}
+                <div class="result-card danger">
+                    <div class="result-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="result-content">
+                        <h3 class="result-title">⚠️ Suspicious Website</h3>
+                        <div class="confidence-bar">
+                            <div class="confidence-fill danger-fill" style="width: {{ ((1 - xx) * 100)|round|int }}%"></div>
+                        </div>
+                        <p class="confidence-text">
+                            Threat Level: <strong>{{ ((1 - xx) * 100)|round(1) }}%</strong>
+                        </p>
+                        <p class="result-message">
+                            ⚠️ Warning: This URL shows characteristics of a phishing website. Proceed with extreme caution!
+                        </p>
+                        <div class="warning-box">
+                            <i class="fas fa-info-circle"></i>
+                            <div>
+                                <strong>Why is this dangerous?</strong>
+                                <ul>
+                                    <li>May steal personal information</li>
+                                    <li>Could contain malware</li>
+                                    <li>Might impersonate legitimate sites</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <button onclick="confirmVisit('{{ url }}')" class="action-btn danger-btn">
+                            <i class="fas fa-exclamation-circle"></i>
+                            Proceed Anyway (Not Recommended)
+                        </button>
+                    </div>
+                </div>
+                {% endif %}
+
+                <div class="features-analyzed">
+                    <h4><i class="fas fa-cogs"></i> Analysis Details</h4>
+                    <div class="feature-grid">
+                        <div class="feature-item">
+                            <i class="fas fa-lock"></i>
+                            <span>SSL Certificate</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-server"></i>
+                            <span>Domain Age</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-code"></i>
+                            <span>URL Structure</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Traffic Patterns</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-database"></i>
+                            <span>30+ Features</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-brain"></i>
+                            <span>ML Analysis</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="info-cards">
+            <div class="info-card">
+                <div class="info-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3>AI-Powered</h3>
+                <p>Advanced machine learning algorithms analyze 30+ features</p>
+            </div>
+            <div class="info-card">
+                <div class="info-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3>Real-Time</h3>
+                <p>Instant analysis with 97.4% accuracy rate</p>
+            </div>
+            <div class="info-card">
+                <div class="info-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Protected</h3>
+                <p>Stay safe from phishing attacks and malware</p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 PhishGuard AI | Powered by Machine Learning</p>
+    </footer>
+
+    <script>
+        function confirmVisit(url) {
+            if (confirm('⚠️ WARNING: This site may be dangerous!\n\nAre you absolutely sure you want to visit this potentially harmful website?')) {
+                window.open(url, '_blank');
+            }
+        }
+
+        // Smooth scroll animation for results
+        {% if xx != -1 %}
+        setTimeout(() => {
+            document.getElementById('resultSection').scrollIntoView({ 
+                behavior: 'smooth', 
+                block: 'nearest' 
+            });
+        }, 500);
+        {% endif %}
+
+        // Form validation
+        document.getElementById('urlForm').addEventListener('submit', function(e) {
+            const urlInput = document.getElementById('urlInput');
+            const url = urlInput.value.trim();
+            
+            if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                e.preventDefault();
+                alert('⚠️ Please enter a valid URL starting with http:// or https://');
+                return false;
+            }
+        });
+
+        // Animated stars background
+        const starsDiv = document.querySelector('.stars');
+        for (let i = 0; i < 100; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            starsDiv.appendChild(star);
+        }
+    </script>
+</body>
+</html>
