@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 import socket
 import requests
 from googlesearch import search
-import whois
+import whois  
 from datetime import date, datetime
 import time     
 from dateutil.parser import parse as date_parse
