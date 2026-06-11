@@ -18,7 +18,7 @@
 ## Project Overview
 
 ### What is PhishGuard AI?     
-PhishGuard AI is an **AI-powered phishing URL detection system** that uses machine learning to classify URLs as either **legitimate (safe)** or **phishing (malicious)** with **97.06% accuracy**. The system analyzes URLs by extracting 30 distinct features and feeding them into an XGBoost classifier for real-time prediction.
+PhishGuard AI is an **AI-powered phishing URL detection system** that uses machine learning to classify URLs as either **legitimate (safe)** or **phishing (malicious)** with **97.06% accuracy**. The system analyzes URLs by extracting 30 distinct features and feeding them into an XGBoost classifier for real-time prediction.    
 
 ### Why is it Important?
 - **Phishing attacks** are one of the most common cyber threats affecting individuals and enterprises
