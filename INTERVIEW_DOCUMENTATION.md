@@ -10,7 +10,7 @@
 4. [30-Feature Extraction System](#30-feature-extraction-system)
 5. [XGBoost Algorithm Deep Dive](#xgboost-algorithm-deep-dive)
 6. [Model Performance Analysis](#model-performance-analysis)
-7. [How the System Works](#how-the-system-works)  
+7. [How the System Works](#how-the-system-works)      
 8. [Interview Q&A Section](#interview-qa-section)    
 
 ---
