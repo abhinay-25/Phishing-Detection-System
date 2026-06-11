@@ -23,7 +23,7 @@ PhishGuard AI is an **AI-powered phishing URL detection system** that uses machi
 ### Why is it Important?
 - **Phishing attacks** are one of the most common cyber threats affecting individuals and enterprises
 - Traditional rule-based systems are limited and easily bypassed     
-- Machine learning models can detect **novel phishing patterns** not seen before
+- Machine learning models can detect **novel phishing patterns** not seen before     
 - Real-time detection prevents users from falling victim to scams
 
 ### Key Metrics
