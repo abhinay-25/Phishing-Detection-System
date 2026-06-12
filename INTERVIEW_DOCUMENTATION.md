@@ -28,7 +28,7 @@ PhishGuard AI is an **AI-powered phishing URL detection system** that uses machi
 
 ### Key Metrics             
 - **Accuracy**: 97.06%
-- **F1-Score**: 97.39%                                  
+- **F1-Score**: 97.39%                                                          
 - **Recall**: 98.30% (catches 98.3% of phishing URLs)
 - **Precision**: 96.50% (low false positives)
 - **Features Used**: 30 URL characteristics
