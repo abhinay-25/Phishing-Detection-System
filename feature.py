@@ -30,7 +30,7 @@ class FeatureExtraction:
 
         try:
             self.urlparse = urlparse(url)
-            self.domain = self.urlparse.netloc
+            self.domain = self.urlparse.netloc                            
         except:
             pass
 
