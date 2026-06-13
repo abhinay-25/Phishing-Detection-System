@@ -42,7 +42,7 @@ class FeatureExtraction:
 
         
 
-        self.features.append(self.UsingIp())
+        self.features.append(self.UsingIp())             
         self.features.append(self.longUrl())
         self.features.append(self.shortUrl())
         self.features.append(self.symbol())
