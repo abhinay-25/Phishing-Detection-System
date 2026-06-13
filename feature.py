@@ -12,7 +12,7 @@ from dateutil.parser import parse as date_parse
 from urllib.parse import urlparse       
 
 class FeatureExtraction:    
-    features = []
+    features = []            
     def __init__(self,url):
         self.features = []
         self.url = url
