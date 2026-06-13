@@ -18,7 +18,7 @@ class FeatureExtraction:
         self.url = url          
         self.domain = ""
         self.whois_response = ""
-        self.urlparse = ""
+        self.urlparse = ""              
         self.response = ""
         self.soup = ""
 
