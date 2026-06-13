@@ -46,7 +46,7 @@ class FeatureExtraction:
         self.features.append(self.longUrl())
         self.features.append(self.shortUrl())
         self.features.append(self.symbol())
-        self.features.append(self.redirecting())
+        self.features.append(self.redirecting())           
         self.features.append(self.prefixSuffix())
         self.features.append(self.SubDomains())
         self.features.append(self.Hppts())
