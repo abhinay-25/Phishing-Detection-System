@@ -23,7 +23,7 @@ class FeatureExtraction:
         self.soup = ""
 
         try:
-            self.response = requests.get(url)
+            self.response = requests.get(url)               
             self.soup = BeautifulSoup(response.text, 'html.parser')
         except:
             pass
