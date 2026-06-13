@@ -37,7 +37,7 @@ class FeatureExtraction:
         try:                         
             self.whois_response = whois.whois(self.domain)
         except:
-            pass
+            pass                        
 
 
         
