@@ -15,7 +15,7 @@ class FeatureExtraction:
     features = []            
     def __init__(self,url):
         self.features = []
-        self.url = url
+        self.url = url          
         self.domain = ""
         self.whois_response = ""
         self.urlparse = ""
